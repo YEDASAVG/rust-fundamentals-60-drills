@@ -1,0 +1,17 @@
+/target
+Cargo.lock
+.DS_Store
+
+# Exclude text files and PDFs
+*.txt
+*.pdf
+*.bmp
+*.jpg
+
+# Exclude roadmap and planning docs
+*Roadmap*.md
+*roadmap*.md
+AI-*.md
+
+# Keep README
+!README.md
