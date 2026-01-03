@@ -220,9 +220,6 @@
 //     println!("{:?}", wrap_in_vec(word));
 // }
 
-// DRILL 6.10: Real-World Pattern - Generic Cache
-// Problem Statement:
-// Build a practical generic cache structure that stores key-value pairs.
 
 // DRILL 6.10: Real-World Pattern - Generic Cache
 // Problem Statement:
