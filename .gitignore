@@ -11,6 +11,8 @@ Cargo.lock
 # Exclude roadmap and planning docs
 *Roadmap*.md
 *roadmap*.md
+*plan*.md
+*PLAN*.md
 AI-*.md
 
 # Keep README

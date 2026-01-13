@@ -175,7 +175,6 @@
 //     println!("{:?}", result2);
 // }
 
-
 // DRILL 6.8: Generic Functions - Find Max
 // Problem Statement:
 // Learn to write the most common pattern: generic functions that work with any type meeting constraints
@@ -220,7 +219,6 @@
 //     println!("{:?}", wrap_in_vec(word));
 // }
 
-
 // DRILL 6.10: Real-World Pattern - Generic Cache
 // Problem Statement:
 // Build a practical generic cache structure that stores key-value pairs.
@@ -238,7 +236,7 @@
 //     }
 
 //     fn get(&self, key: &K) -> Option<&V> where K:PartialEq {
-//          self.data.iter().find(|(k, _v)| k == key). map(|(_k, v)| v) 
+//          self.data.iter().find(|(k, _v)| k == key). map(|(_k, v)| v)
 //     }
 // }
 
@@ -256,7 +254,7 @@
 // Test it with integers and strings
 
 struct Box<T> {
-    value: T
+    value: T,
 }
 
 impl<T> Box<T> {

@@ -9,7 +9,6 @@
 //     // println!("{:?}", numbers[10]);
 // }
 
-
 // DRILL 5.2: Vec - Push and Pop
 // Problem Statement:
 // Learn how to add and remove elements from a vector.
@@ -49,10 +48,9 @@
 //     let mut numbers = vec![1, 2, 3, 4];
 //     for i in numbers.iter_mut() {
 //        *i *= 2;
-//     }   
+//     }
 //     println!("{:?}", numbers);
 // }
-
 
 // DRILL 5.5: HashMap - Insert and Get
 // Problem Statement:
@@ -135,7 +133,6 @@
 use std::collections::HashMap;
 
 fn main() {
-
     let mut word_count = HashMap::new();
     let line = String::from("rust is great rust is fast rust is safe");
     for word in line.split_whitespace() {

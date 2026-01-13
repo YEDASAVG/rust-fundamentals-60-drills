@@ -143,7 +143,6 @@
 //     }
 // }
 
-
 // DRILL 1.13: Collect into Vector
 // Problem Statement:
 // Take a range 1 to 5, square each number, and store the results in a new vector. Then print the vector.
@@ -186,7 +185,7 @@
 //     let positive = numbers.iter().all(|x| *x > 0);
 
 //     println!("Has umber > 100 {} All positive: {}", large, positive);
-// } 
+// }
 
 // DRILL 1.17: Take and Skip
 // Problem Statement:
@@ -235,7 +234,12 @@
 // Combine everything you've learned. Take numbers 1-20, filter odds, square them, skip first 2, take next 3, then sum them.
 
 fn main() {
-    let result: i32 = (1..=20).filter(|x| x % 2 != 0).map(|x| x * x).skip(2).take(3).sum();
+    let result: i32 = (1..=20)
+        .filter(|x| x % 2 != 0)
+        .map(|x| x * x)
+        .skip(2)
+        .take(3)
+        .sum();
 
     println!("{}", result);
 }

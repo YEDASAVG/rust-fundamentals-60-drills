@@ -439,7 +439,11 @@ fn compare<'a, 'b>(x: &'a str, y: &'b str) -> Comparison<'a, 'b> {
 }
 
 impl<'a, 'b> Comparison<'a, 'b> {
-    fn get_shorter<'c>(&'c self) -> &'c str where 'a: 'c, 'b: 'c {
+    fn get_shorter<'c>(&'c self) -> &'c str
+    where
+        'a: 'c,
+        'b: 'c,
+    {
         if self.first.len() <= self.second.len() {
             self.first
         } else {

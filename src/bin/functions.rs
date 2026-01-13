@@ -52,7 +52,7 @@
 //     } else {
 //         n * factorial(n - 1) // this is where magic is
 //     }
-// } 
+// }
 
 // fn main() {
 //     println!("{}", factorial(5));
@@ -123,9 +123,8 @@
 //     let rectangle = Rectangle::new(5, 10);
 //     let result = rectangle.area();
 //     println!("Area of Rectangle: {}", result);
-    
-// }
 
+// }
 
 // DRILL 3.9: Returning Closures
 // Problem Statement:
@@ -141,7 +140,6 @@
 //     println!("{}", add5(20));
 //     println!("{}", add10(20));
 // }
-
 
 // DRILL 3.10: Generic Functions
 // Problem Statement:

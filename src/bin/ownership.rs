@@ -20,7 +20,7 @@
 //     let a = a + 1;
 //     let a = a * 2;
 //     let a = "Abhiraj";
-//     println!("{}", a); 
+//     println!("{}", a);
 // }
 
 // DRILL 4.3: Ownership - Move Semantics
@@ -46,11 +46,9 @@
 //     println!("{}", s2);
 // }
 
-
 // DRILL 4.5: Borrowing - Immutable References
 // Problem Statement:
 // Learn how to borrow data without taking ownership, allowing multiple readers.
-
 
 // fn calculate_length(s: &String) -> usize {
 //     s.len()
@@ -86,7 +84,7 @@
 //     let r1 = &word;
 //     let r2 =&word;
 //     // let r3 = &mut word;
-    
+
 //     println!("{}", r1);
 //     println!("{}", r2);
 //     // println!("{}", r3);

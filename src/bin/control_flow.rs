@@ -59,7 +59,6 @@
 //     }
 // }
 
-
 // DRILL 2.4: Match with Numbers
 // Problem Statement:
 // Use match to categorize a number into ranges.
@@ -74,7 +73,7 @@
 //         std::process::exit(1);
 //     }
 //     let num_str = &args[1];
-//     let num: i32 = num_str.parse().expect("Failed to parse the input"); 
+//     let num: i32 = num_str.parse().expect("Failed to parse the input");
 
 //     match num {
 //         1..=10 => println!("Small"),
@@ -91,9 +90,9 @@
 // fn main() {
 //     let num = 24;
 //     match num {
-//         n if n >= 20 && n <= 30 && n % 2 == 0 => println!("Even in range"), 
+//         n if n >= 20 && n <= 30 && n % 2 == 0 => println!("Even in range"),
 //         n if n >= 20 && n <= 30 && n % 2 != 0 => println!("Odd in range"),
-//         _ => println!("Out of range"), 
+//         _ => println!("Out of range"),
 //     }
 // }
 
@@ -159,7 +158,9 @@
 fn main() {
     let value = Some(100);
 
-    if let Some(x) = value && x > 50 {
+    if let Some(x) = value
+        && x > 50
+    {
         println!("Large value: {}", x);
     }
 }
