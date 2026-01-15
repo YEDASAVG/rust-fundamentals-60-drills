@@ -455,40 +455,40 @@
 
 // example 2
 
-use serde::{Deserialize};
-#[derive(Deserialize, Debug)]
-struct Post {
-    userId: u32,
-    id: u32,
-    title: String,
-    body: String,
-}
+// use serde::{Deserialize};
+// #[derive(Deserialize, Debug)]
+// struct Post {
+//     userId: u32,
+//     id: u32,
+//     title: String,
+//     body: String,
+// }
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let url = "https://jsonplaceholder.typicode.com/posts/1";
+// #[tokio::main]
+// async fn main() -> Result<(), Box<dyn std::error::Error>> {
+//     let url = "https://jsonplaceholder.typicode.com/posts/1";
 
-    let post: Post = reqwest::get(url)
-    .await?
-    .json()
-    .await?;
+//     let post: Post = reqwest::get(url)
+//     .await?
+//     .json()
+//     .await?;
 
-    println!("Post: {:#?}", post);
-    Ok(())
-}
+//     println!("Post: {:#?}", post);
+//     Ok(())
+// }
 
 // example 3
 // use reqwest;
 // use serde::{Deserialize, Serialize};
 
-// #[derive(Serialize)]
+// #[derive(Serialize)]         // For sending data (Serialize) 
 // struct CreatePost {
 //     title: String,
 //     body: String,
 //     user_id: u32,
 // }
 
-// #[derive(Deserialize, Debug)]
+// #[derive(Deserialize, Debug)]   // For receiving data (Deserialize)
 // struct CreatedPost {
 //     id: u32,
 //     title: String,
@@ -518,3 +518,84 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 //     Ok(())
 // }
+
+// DRILL 4: Real API Fetch with reqwest
+// Problem Statement:
+// Goal: Fetch users from a real API, parse JSON, and display formatted output.
+
+// API Endpoint: https://jsonplaceholder.typicode.com/users
+
+// Tasks:
+
+// Create structs to match the API response:
+
+// User has: id, name, email, phone, website
+// User also has nested address with: city, street
+// User also has nested company with: name
+// Fetch ALL users (it returns 10 users)
+
+// Print formatted output like:
+
+use reqwest;
+use serde::{Deserialize, Serialize};
+
+#[derive(Deserialize, Debug)]
+struct User {
+    id: u32,
+    name: String,
+    email: String,
+    phone: String,
+    address: Address,
+    company: Company,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Address {
+    city: String,
+    street: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Company {
+    name: String,
+}
+
+use std::fmt::{self};
+impl fmt::Display for User {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f,
+            "#{}: {}\n    Email: {}\n    Phone: {}\n    City: {}\n    Company: {}",
+            self.id,
+            self.name,
+            self.email,
+            self.phone,
+            self.address.city,
+            self.company.name)
+    }
+}
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    
+    let url = "https://jsonplaceholder.typicode.com/users/1";
+    let users: Vec<User> = reqwest::get(url)
+    .await?
+    .json()
+    .await?;
+
+    use tokio::time::Instant;
+    let start = Instant::now();
+
+    println!("\n=== Fetching Users ===\n");
+    println!("=== User List ===\n");
+
+    let total = users.len();
+    for user in users.iter() {
+        println!("{}", user);
+        println!();
+    }
+
+    let elapsed = Instant::now() - start;
+    println!("Total users: {}", total);
+    println!("Time taken: {:?}\n", elapsed);
+    Ok(())
+}
