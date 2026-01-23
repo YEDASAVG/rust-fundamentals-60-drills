@@ -944,28 +944,45 @@
 
 // Drill 25 File Operation with Error Handling
 
-use std::env;
+// use std::env;
 
-fn divide(a: f64, b: f64) -> Result<f64, String> {
-    if b == 0.0 {
-        Err(String::from("Error: cannot divide by zero"))
-    } else {
-        Ok(a / b)
-    }
-}
+// fn divide(a: f64, b: f64) -> Result<f64, String> {
+//     if b == 0.0 {
+//         Err(String::from("Error: cannot divide by zero"))
+//     } else {
+//         Ok(a / b)
+//     }
+// }
+
+// fn main() {
+//     let args: Vec<String> = env::args().collect();
+//     if args.len() != 3 {
+//         eprintln!("Usage: {} <number1> <number2>", args[0]);
+//         std::process::exit(1);
+//     }
+//     let a = args[1].parse().expect("First argument must be a number");
+//     let b = args[2].parse().expect("Second argument must be a number");
+
+//     let result = divide(a, b);
+//     match result {
+//         Ok(value) => println!("Result: {}", value),
+//         Err(error) => println!("{}", error),
+//     }
+// }
+
+
+use std::collections::HashMap;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    if args.len() != 3 {
-        eprintln!("Usage: {} <number1> <number2>", args[0]);
-        std::process::exit(1);
-    }
-    let a = args[1].parse().expect("First argument must be a number");
-    let b = args[2].parse().expect("Second argument must be a number");
+    let mut cache: HashMap<i32, String> = HashMap::new();
 
-    let result = divide(a, b);
-    match result {
-        Ok(value) => println!("Result: {}", value),
-        Err(error) => println!("{}", error),
+    cache.insert(1, "Abhiraj".to_string());
+    cache.insert(2, "Rahul".to_string());
+
+    if let Some(name) = cache.get(&1) {
+        println!("User 1: {}", name)
     }
+
+    cache.insert(1, "Abhishek".to_string());
+    println!("{:?}", cache);
 }
