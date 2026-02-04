@@ -328,24 +328,24 @@
 // }
 
 use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+// struct Cache {
+//     data: RefCell<Vec<String>>, //Mutable inside immutable
+// }
 
-struct Cache {
-    data: RefCell<Vec<String>>, //Mutable inside immutable
-}
+// impl Cache {
+//     fn new() -> Cache {
+//         Cache { data: RefCell::new(vec![]) }
+//     }
+//     // &self is immutable but we can still modify the data
+//     fn add(&self, item: String) {
+//         self.data.borrow_mut().push(item); // Mutate
+//     }
 
-impl Cache {
-    fn new() -> Cache {
-        Cache { data: RefCell::new(vec![]) }
-    }
-    // &self is immutable but we can still modify the data
-    fn add(&self, item: String) {
-        self.data.borrow_mut().push(item); // Mutate
-    }
-
-    fn get_count(&self) -> usize {
-        self.data.borrow().len() // Read only
-    }
-}
+//     fn get_count(&self) -> usize {
+//         self.data.borrow().len() // Read only
+//     }
+// }
 
 // fn main() {
 //     let cache = Cache::new(); // Immuatable
@@ -356,17 +356,58 @@ impl Cache {
 //     println!("Count: {}", cache.get_count())
 // }
 
+// fn main() {
+//     let value = RefCell::new(5);
+
+//     println!("Original: {:?}", value);
+
+//     *value.borrow_mut() += 10;
+
+//     println!("After mutation: {:?}", value);
+
+//     let a = value.borrow();
+//     let b = value.borrow();
+
+//     println!("a = {}, b = {}", *a, *b);
+// }
+
+#[derive(Debug)]
+
+// struct Node {
+//     value: i32,
+//     next: RefCell<Option<Rc<Node>>>,
+// }
+
+// fn main() {
+//     let a = Rc::new(Node {value: 1, next: RefCell::new(None)});
+//     let b = Rc::new(Node {value: 2, next: RefCell::new(None)});
+
+//     *a.next.borrow_mut() = Some(Rc::clone(&b));
+//     *b.next.borrow_mut() = Some(Rc::clone(&a));
+
+// }
+
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>, // Parent = Weak )no ownership
+    children: RefCell<Vec<Rc<Node>>> // children = Rc (ownership)
+}
+
 fn main() {
-    let value = RefCell::new(5);
+    let strong = Rc::new(5);
+    let weak = Rc::downgrade(&strong);
 
-    println!("Original: {:?}", value);
+    println!("Strong count: {}", Rc::strong_count(&strong));
+    println!("Weak count: {}", Rc::weak_count(&strong));
 
-    *value.borrow_mut() += 10;
 
-    println!("After mutation: {:?}", value);
+    //accessing weak reference
+    if let Some(value) = weak.upgrade() {
+        println!("Value: {}", value);
+    }
 
-    let a = value.borrow();
-    let b = value.borrow();
+    drop(strong); // Strong reference is drop GONE
 
-    println!("a = {}, b = {}", *a, *b);
+    // Weak cant access anymore
+    println!("After drop: {:?}", weak.upgrade()); // None
 }
